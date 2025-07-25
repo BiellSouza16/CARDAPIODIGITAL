@@ -52,6 +52,9 @@ body {
     vertical-align: middle;
     border-radius: 4px;
     object-fit: contain;
+    filter: hue-rotate(45deg) saturate(1.2) brightness(1.1);
+    background-color: #ffcc00;
+    padding: 2px;
 }
 
 .nav {
@@ -115,6 +118,9 @@ body {
     vertical-align: middle;
     border-radius: 6px;
     object-fit: contain;
+    filter: hue-rotate(45deg) saturate(1.2) brightness(1.1);
+    background-color: #ffcc00;
+    padding: 2px;
 }
 
 .section-subtitle {
