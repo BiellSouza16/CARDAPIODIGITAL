@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coxinha Real - Cardápio Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍗 Coxinha Real</h1>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="salgados">Salgados R$1,00</button>
+                <button class="nav-btn" data-section="combos">Combos</button>
+                <button class="nav-btn" data-section="bebidas">Bebidas</button>
+                <button class="nav-btn" data-section="finalizar">Finalizar</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Seção Salgados R$1,00 -->
+        <section id="salgados" class="section active">
+            <div class="container">
+                <h2 class="section-title">🍗 Salgados de R$1,00</h2>
+                <p class="section-subtitle">Salgados de 35g por R$1,00 cada</p>
+                
+                <div class="items-grid">
+                    <div class="item-card" data-item="coxinha" data-price="1.00">
+                        <h3>Coxinha (Frango)</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="palitinho" data-price="1.00">
+                        <h3>Palitinho (Queijo com Presunto)</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="balaozinho" data-price="1.00">
+                        <h3>Balãozinho (Frango com Requeijão)</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="travesseirinho" data-price="1.00">
+                        <h3>Travesseirinho (Carne)</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="kibe-queijo" data-price="1.00">
+                        <h3>Kibe de Queijo</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="kibe-carne" data-price="1.00">
+                        <h3>Kibe de Carne</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="churros-doce" data-price="1.00">
+                        <h3>Churros de Doce de Leite</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="churros-chocolate" data-price="1.00">
+                        <h3>Churros de Chocolate</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="enroladinho" data-price="1.00">
+                        <h3>Enroladinho de Salsicha</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="boliviano" data-price="1.00">
+                        <h3>Boliviano (Carne)</h3>
+                        <div class="price">R$ 1,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Combos -->
+        <section id="combos" class="section">
+            <div class="container">
+                <h2 class="section-title">🍱 Combos de Mini Salgados (20g)</h2>
+                
+                <div class="combos-grid">
+                    <!-- 25 Minis Salgados -->
+                    <div class="combo-card" data-combo="combo-25-sem" data-price="20.00">
+                        <h3>✅ 25 Minis Salgados</h3>
+                        <div class="price">R$ 20,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <!-- Combo a Dois com 2 Refri 200ml -->
+                    <div class="combo-card" data-combo="combo-25-com" data-price="24.00">
+                        <h3>✅ Combo a Dois com 2 Refri 200ml</h3>
+                        <div class="price">R$ 24,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="refri-selection" style="display: none;">
+                            <h4 class="required-field">Selecione os refrigerantes obrigatórios:</h4>
+                            <div class="refri-grid">
+                                <div class="refri-item">
+                                    <label>Pepsi 200ml:</label>
+                                    <input type="number" class="refri-qty" data-refri="pepsi-200" min="0" value="0">
+                                </div>
+                                <div class="refri-item">
+                                    <label>Guaraná 200ml:</label>
+                                    <input type="number" class="refri-qty" data-refri="guarana-200" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="refri-counter">Selecionados: <span class="refri-selected-count">0</span> / <span class="refri-total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <!-- 50 Minis Salgados -->
+                    <div class="combo-card" data-combo="combo-50-sem" data-price="35.00">
+                        <h3>✅ 50 Minis Salgados</h3>
+                        <div class="price">R$ 35,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <!-- Combo Grupinho com 1 Refri 1L -->
+                    <div class="combo-card" data-combo="combo-50-com" data-price="40.00">
+                        <h3>✅ Combo Grupinho com 1 Refri 1L</h3>
+                        <div class="price">R$ 40,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="refri-selection" style="display: none;">
+                            <h4 class="required-field">Selecione o refrigerante obrigatório:</h4>
+                            <div class="refri-grid">
+                                <div class="refri-item">
+                                    <label>Pepsi 1L:</label>
+                                    <input type="number" class="refri-qty" data-refri="pepsi-1l" min="0" value="0">
+                                </div>
+                                <div class="refri-item">
+                                    <label>Guaraná 1L:</label>
+                                    <input type="number" class="refri-qty" data-refri="guarana-1l" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="refri-counter">Selecionados: <span class="refri-selected-count">0</span> / <span class="refri-total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <!-- 100 Minis Salgados -->
+                    <div class="combo-card" data-combo="combo-100-sem" data-price="65.00">
+                        <h3>✅ 100 Minis Salgados</h3>
+                        <div class="price">R$ 65,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <!-- Combo Galera com 1 Refri 2L -->
+                    <div class="combo-card" data-combo="combo-100-com" data-price="70.00">
+                        <h3>✅ Combo Galera com 1 Refri 2L</h3>
+                        <div class="price">R$ 70,00</div>
+                        
+                        <div class="combo-quantity">
+                            <label>Quantidade de combos:</label>
+                            <div class="quantity-control">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" class="combo-qty-input" min="0" value="0">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="sabores-selection" style="display: none;">
+                            <h4>Selecione os sabores dos mini salgados:</h4>
+                            <div class="sabores-grid">
+                                <div class="sabor-item">
+                                    <label>Coxinha:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="coxinha" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Palitinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="palitinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Balãozinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="balaozinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Travesseirinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="travesseirinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Queijo:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-queijo" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Kibe de Carne:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="kibe-carne" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Doce:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-doce" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Churros de Chocolate:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="churros-chocolate" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Enroladinho:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="enroladinho" min="0" value="0">
+                                </div>
+                                <div class="sabor-item">
+                                    <label>Boliviano:</label>
+                                    <input type="number" class="sabor-qty" data-sabor="boliviano" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="sabores-counter">Selecionados: <span class="selected-count">0</span> / <span class="total-needed">0</span></div>
+                        </div>
+
+                        <div class="refri-selection" style="display: none;">
+                            <h4 class="required-field">Selecione o refrigerante obrigatório:</h4>
+                            <div class="refri-grid">
+                                <div class="refri-item">
+                                    <label>It Cola 2L:</label>
+                                    <input type="number" class="refri-qty" data-refri="it-cola-2l" min="0" value="0">
+                                </div>
+                                <div class="refri-item">
+                                    <label>It Guaraná 2L:</label>
+                                    <input type="number" class="refri-qty" data-refri="it-guarana-2l" min="0" value="0">
+                                </div>
+                            </div>
+                            <div class="refri-counter">Selecionados: <span class="refri-selected-count">0</span> / <span class="refri-total-needed">0</span></div>
+                        </div>
+
+                        <div class="combo-total">Total: R$ 0,00</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Bebidas -->
+        <section id="bebidas" class="section">
+            <div class="container">
+                <h2 class="section-title">🥤 Bebidas</h2>
+                
+                <div class="items-grid">
+                    <div class="item-card" data-item="pepsi-200" data-price="3.00">
+                        <h3>Pepsi 200ml</h3>
+                        <div class="price">R$ 3,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="guarana-200" data-price="3.00">
+                        <h3>Guaraná 200ml</h3>
+                        <div class="price">R$ 3,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="pepsi-350" data-price="4.00">
+                        <h3>Pepsi 350ml</h3>
+                        <div class="price">R$ 4,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="guarana-350" data-price="4.00">
+                        <h3>Guaraná 350ml</h3>
+                        <div class="price">R$ 4,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="pepsi-1l" data-price="7.00">
+                        <h3>Pepsi 1L</h3>
+                        <div class="price">R$ 7,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="guarana-1l" data-price="7.00">
+                        <h3>Guaraná 1L</h3>
+                        <div class="price">R$ 7,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="it-cola-2l" data-price="8.00">
+                        <h3>It Cola 2L</h3>
+                        <div class="price">R$ 8,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="it-guarana-2l" data-price="8.00">
+                        <h3>It Guaraná 2L</h3>
+                        <div class="price">R$ 8,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="agua-mineral" data-price="2.00">
+                        <h3>Água Mineral</h3>
+                        <div class="price">R$ 2,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+
+                    <div class="item-card" data-item="agua-gas" data-price="3.00">
+                        <h3>Água com Gás</h3>
+                        <div class="price">R$ 3,00</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" min="0" value="0">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <div class="item-total">Total: R$ 0,00</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Finalizar -->
+        <section id="finalizar" class="section">
+            <div class="container">
+                <h2 class="section-title">📋 Finalizar Pedido</h2>
+                
+                <div class="order-form">
+                    <div class="form-group">
+                        <label for="cliente-nome">Nome do Cliente *</label>
+                        <input type="text" id="cliente-nome" class="form-input" placeholder="Digite seu nome">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data-retirada">Data de Retirada *</label>
+                        <input type="date" id="data-retirada" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="horario-retirada">Horário de Retirada *</label>
+                        <input type="time" id="horario-retirada" class="form-input">
+                    </div>
+                    
+                    <div class="payment-warning">
+                        ⚠️ É necessário pagar 50% para confirmação do pedido ou informar pagamento em dinheiro/cartão na loja.
+                    </div>
+                    
+                    <div class="total-section">
+                        <div class="grand-total">
+                            <strong>Valor Total: R$ <span id="grand-total-value">0,00</span></strong>
+                        </div>
+                    </div>
+                    
+                    <button id="finalizar-pedido-btn" class="finalize-btn" disabled>
+                        📱 Finalizar Pedido no WhatsApp
+                    </button>
+                </div>
+
+                <div class="order-summary">
+                    <h3>📄 Resumo do Pedido</h3>
+                    <div id="order-summary-content">
+                        <p class="empty-order">Adicione itens ao seu pedido para ver o resumo aqui.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Resumo -->
+    <div id="resumo-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Resumo do Pedido</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="resumo-pedido"></div>
+                <div class="modal-actions">
+                    <button id="enviar-whatsapp" class="whatsapp-btn">
+                        📱 Enviar para WhatsApp
+                    </button>
+                    <button id="fechar-modal" class="cancel-btn">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">
+        🔼
+    </button>
+
+    <!-- Mensagens de Erro -->
+    <div id="error-messages" class="error-messages"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,829 @@
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #FFD700;
+    color: #000;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background-color: #000;
+    color: #FFD700;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover {
+    background-color: #FFA500;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background-color: #DC143C;
+    color: #fff;
+}
+
+/* Main Content */
+.main {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+}
+
+.section {
+    display: none;
+    padding: 40px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.section.active {
+    display: block;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #000;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Grid de Itens */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.item-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    border-color: #FFD700;
+}
+
+.item-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #DC143C;
+    margin-bottom: 20px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.qty-btn {
+    background-color: #000;
+    color: #FFD700;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.qty-btn:hover {
+    background-color: #333;
+    transform: scale(1.1);
+}
+
+.qty-input {
+    width: 80px;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.qty-input:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.item-total {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Combos */
+.combos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.combo-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 3px solid #FFD700;
+}
+
+.combo-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.combo-card .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #DC143C;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.combo-quantity {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.combo-quantity label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #000;
+}
+
+.combo-qty-input {
+    width: 80px;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.sabores-selection, .refri-selection {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+.sabores-selection h4, .refri-selection h4 {
+    margin-bottom: 15px;
+    color: #000;
+    font-size: 1.2rem;
+}
+
+.required-field {
+    color: #DC143C !important;
+    font-weight: bold;
+}
+
+.sabores-grid, .refri-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.sabor-item, .refri-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.sabor-item label, .refri-item label {
+    font-weight: 600;
+    color: #000;
+}
+
+.sabor-qty, .refri-qty {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.sabores-counter, .refri-counter {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    background: #e9e9e9;
+    border-radius: 8px;
+    color: #000;
+}
+
+.combo-total {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #DC143C;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 3px solid #FFD700;
+}
+
+/* Formulário de Finalização */
+.order-form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #000;
+    font-size: 1.1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.payment-warning {
+    background-color: #FFF3CD;
+    color: #856404;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 2px solid #FFE066;
+    font-weight: bold;
+    text-align: center;
+}
+
+.total-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.grand-total {
+    font-size: 2rem;
+    color: #DC143C;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #FFD700;
+}
+
+.finalize-btn {
+    width: 100%;
+    background-color: #DC143C;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.finalize-btn:hover:not(:disabled) {
+    background-color: #B91C3C;
+    transform: translateY(-2px);
+}
+
+.finalize-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Resumo do Pedido */
+.order-summary {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.order-summary h3 {
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.empty-order {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    background-color: #000;
+    color: #FFD700;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close {
+    color: #FFD700;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #FFA500;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.whatsapp-btn {
+    flex: 1;
+    background-color: #25D366;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    background-color: #20BA5A;
+}
+
+.cancel-btn {
+    flex: 1;
+    background-color: #DC143C;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #B91C3C;
+}
+
+/* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #000;
+    color: #FFD700;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    z-index: 1500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.back-to-top:hover {
+    background-color: #333;
+    transform: translateY(-5px);
+}
+
+/* Mensagens de Erro */
+.error-messages {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1500;
+    max-width: 400px;
+}
+
+.error-message {
+    background-color: #DC143C;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: slideInRight 0.3s ease;
+    opacity: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.error-message:hover {
+    transform: translateX(-5px);
+}
+
+.error-message.warning {
+    background-color: #FF8C00;
+}
+
+.error-message.success {
+    background-color: #25D366;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .nav {
+        gap: 5px;
+    }
+    
+    .nav-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .items-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .combos-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .combo-card {
+        padding: 20px;
+    }
+    
+    .sabores-grid, .refri-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .header .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 20px;
+    }
+    
+    .main {
+        margin-top: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-btn {
+        flex: 1;
+        min-width: 140px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .item-card, .combo-card, .order-form, .order-summary {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Estados de validação */
+.invalid {
+    border-color: #DC143C !important;
+    background-color: #FFF5F5 !important;
+}
+
+.error-highlight {
+    background-color: #FFF5F5 !important;
+    border-color: #DC143C !important;
+}
+
+/* Melhorias de compatibilidade cross-browser */
+.qty-input, .combo-qty-input, .sabor-qty, .refri-qty, .form-input {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Remover spinners do input number */
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button,
+.combo-qty-input::-webkit-outer-spin-button,
+.combo-qty-input::-webkit-inner-spin-button,
+.sabor-qty::-webkit-outer-spin-button,
+.sabor-qty::-webkit-inner-spin-button,
+.refri-qty::-webkit-outer-spin-button,
+.refri-qty::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.qty-input[type=number],
+.combo-qty-input[type=number],
+.sabor-qty[type=number],
+.refri-qty[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Melhorias para touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .nav-btn, .qty-btn, .finalize-btn, .whatsapp-btn, .cancel-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .qty-input, .combo-qty-input, .sabor-qty, .refri-qty {
+        min-height: 44px;
+        font-size: 16px; /* Previne zoom no iOS */
+    }
+    
+    .form-input {
+        min-height: 44px;
+        font-size: 16px;
+    }
+}
+
+/* Otimizações para iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .modal-content {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .qty-input, .combo-qty-input, .sabor-qty, .refri-qty, .form-input {
+        -webkit-appearance: none;
+        border-radius: 8px;
+    }
+}
+
+/* Animações para feedback instantâneo */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeOutScale {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(-10px);
+    }
+}
+
+/* Feedback instantâneo */
+.instant-feedback {
+    animation: fadeInScale 0.3s ease;
+}
+
+/* Melhorias visuais */
+.combo-card.has-selection {
+    border-color: #25D366;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
+}
+
+.item-card.has-quantity {
+    border-color: #25D366;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+}
+
+/* Melhorias nos contadores */
+.sabores-counter, .refri-counter {
+    transition: color 0.3s ease;
+}
+
+.sabores-counter .selected-count,
+.refri-counter .refri-selected-count {
+    font-size: 1.2rem;
+}
+
+.sabores-counter .total-needed,
+.refri-counter .refri-total-needed {
+    font-size: 1.2rem;
+}
