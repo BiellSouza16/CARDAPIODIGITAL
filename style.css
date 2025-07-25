@@ -41,6 +41,17 @@ body {
     font-size: 1.8rem;
     font-weight: bold;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border-radius: 4px;
+    object-fit: contain;
 }
 
 .nav {
@@ -92,6 +103,18 @@ body {
     margin-bottom: 10px;
     color: #000;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-logo {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    border-radius: 6px;
+    object-fit: contain;
 }
 
 .section-subtitle {
@@ -625,8 +648,18 @@ body {
         font-size: 1.5rem;
     }
     
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
     .section-title {
         font-size: 2rem;
+    }
+    
+    .section-logo {
+        width: 32px;
+        height: 32px;
     }
     
     .items-grid {
@@ -688,6 +721,16 @@ body {
     
     .section-title {
         font-size: 1.8rem;
+    }
+    
+    .section-logo {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .logo-icon {
+        width: 24px;
+        height: 24px;
     }
     
     .back-to-top {

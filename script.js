@@ -889,19 +889,9 @@ function validateOrderComplete() {
     if (!nome) {
         errors.push('👤 Informe seu nome completo');
     }
-    
+
     if (!data) {
         errors.push('📅 Selecione a data de retirada');
-    } else {
-        // Validar se a data não é anterior ao dia atual (corrigido)
-        const selectedDate = new Date(data);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        selectedDate.setHours(0, 0, 0, 0);
-        
-        if (selectedDate < today) {
-            errors.push('📅 A data de retirada não pode ser anterior ao dia atual');
-        }
     }
     
     if (!horario) {
