@@ -88,8 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeModal();
     initializeBackToTop();
     initializePageProtection();
-    
-    // Campos de data e hora vazios por padrão - cliente deve escolher conscientemente
 });
 
 // Proteção contra recarregamento da página
@@ -773,7 +771,7 @@ function updateOrderSummary() {
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
         hasItems = true;
-        html += '<div class="summary-section"><h4>🍗 Salgados de R$1,00:</h4><ul>';
+        html += '<div class="summary-section"><h4><img src="public/Screenshot_2025-07-23-19-25-04-375_com.mi.globalbrowser.png" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
         salgadosWithQty.forEach(([name, item]) => {
             const displayName = saborNames[name] || name;
             const total = item.quantity * item.price;
@@ -913,9 +911,9 @@ function validateOrderComplete() {
             const expectedSabores = combo.quantity * config.units;
             
             if (totalSabores < expectedSabores) {
-                errors.push(`🍗 Falta selecionar ${expectedSabores - totalSabores} salgados no ${config.name}`);
+                errors.push(`Falta selecionar ${expectedSabores - totalSabores} salgados no ${config.name}`);
             } else if (totalSabores > expectedSabores) {
-                errors.push(`🍗 Remova ${totalSabores - expectedSabores} salgados do ${config.name} (máximo: ${expectedSabores})`);
+                errors.push(`Remova ${totalSabores - expectedSabores} salgados do ${config.name} (máximo: ${expectedSabores})`);
             }
             
             // Validar refrigerantes se necessário
@@ -924,9 +922,9 @@ function validateOrderComplete() {
                 const expectedRefris = combo.quantity * config.refriCount;
                 
                 if (totalRefris < expectedRefris) {
-                    errors.push(`🥤 Selecione ${expectedRefris - totalRefris} refrigerantes no ${config.name}`);
+                    errors.push(`Selecione ${expectedRefris - totalRefris} refrigerantes no ${config.name}`);
                 } else if (totalRefris > expectedRefris) {
-                    errors.push(`🥤 Remova ${totalRefris - expectedRefris} refrigerantes do ${config.name} (máximo: ${expectedRefris})`);
+                    errors.push(`Remova ${totalRefris - expectedRefris} refrigerantes do ${config.name} (máximo: ${expectedRefris})`);
                 }
             }
         }
@@ -1041,7 +1039,7 @@ function generateOrderSummary() {
     // Salgados avulsos
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
-        resumo += '🍗 SALGADOS AVULSOS:\n';
+        resumo += 'SALGADOS AVULSOS:\n';
         salgadosWithQty.forEach(([name, item]) => {
             const displayName = saborNames[name] || name;
             const total = item.quantity * item.price;

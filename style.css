@@ -118,9 +118,19 @@ body {
     vertical-align: middle;
     border-radius: 6px;
     object-fit: contain;
-    filter: hue-rotate(45deg) saturate(1.2) brightness(1.1);
-    background-color: #ffcc00;
+    background-color: #FFD700;
+    padding: 4px;
+}
+
+.summary-logo {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    border-radius: 4px;
+    object-fit: contain;
+    background-color: #FFD700;
     padding: 2px;
+    margin-right: 8px;
 }
 
 .section-subtitle {
