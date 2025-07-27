@@ -47,8 +47,8 @@ body {
 }
 
 .logo-icon {
-    width: 32px;
-    height: 32px;
+    width: 45px;
+    height: 45px;
     vertical-align: middle;
     border-radius: 4px;
     object-fit: contain;
@@ -113,8 +113,8 @@ body {
 }
 
 .section-logo {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     vertical-align: middle;
     border-radius: 6px;
     object-fit: contain;
@@ -665,8 +665,8 @@ body {
     }
     
     .logo-icon {
-        width: 28px;
-        height: 28px;
+        width: 38px;
+        height: 38px;
     }
     
     .section-title {
@@ -674,8 +674,8 @@ body {
     }
     
     .section-logo {
-        width: 50px;
-        height: 50px;
+        width: 65px;
+        height: 65px;
     }
     
     .items-grid {
@@ -745,8 +745,8 @@ body {
     }
     
     .logo-icon {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
     }
     
     .back-to-top {
