@@ -771,7 +771,7 @@ function updateOrderSummary() {
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
         hasItems = true;
-        html += '<div class="summary-section"><h4><img src="public/Screenshot_2025-07-23-19-25-04-375_com.mi.globalbrowser.png" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
+        html += '<div class="summary-section"><h4><img src="public/1 Sem Título_20250726200403.png" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
         salgadosWithQty.forEach(([name, item]) => {
             const displayName = saborNames[name] || name;
             const total = item.quantity * item.price;
