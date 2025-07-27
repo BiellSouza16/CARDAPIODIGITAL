@@ -827,7 +827,7 @@ function updateOrderSummary() {
         bebidasWithQty.forEach(([name, item]) => {
             const total = item.quantity * item.price;
             // Converter nome da bebida para display
-            let displayName = name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            let displayName = capitalizeWords(name.replace(/-/g, ' '));
             html += `<li>${item.quantity} ${displayName} - R$ ${total.toFixed(2).replace('.', ',')}</li>`;
         });
         html += '</ul></div>';
@@ -840,6 +840,13 @@ function updateOrderSummary() {
     }
     
     summaryContent.innerHTML = html;
+}
+
+// Função auxiliar para capitalizar palavras (adicionada no escopo global)
+function capitalizeWords(str) {
+    return str.replace(/\w\S*/g, (txt) => {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
 
 // Inicializar finalização
