@@ -981,43 +981,42 @@ function generateOrderSummary() {
     const data = document.getElementById('data-retirada').value;
     const horario = document.getElementById('horario-retirada').value;
     
-    // Formatear data
+    // Função para capitalizar primeira letra de cada palavra
+    function capitalizeWords(str) {
+        return str.replace(/\w\S*/g, (txt) => {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+    
+    // Formatar data
     const dataObj = new Date(data + 'T00:00:00');
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
     
     let dataText;
     if (dataObj.getTime() === hoje.getTime()) {
-        dataText = 'hoje';
+        dataText = `Para hoje às ${horario}`;
     } else {
-        const amanha = new Date(hoje);
-        amanha.setDate(amanha.getDate() + 1);
-        if (dataObj.getTime() === amanha.getTime()) {
-            dataText = 'amanhã';
-        } else {
-            dataText = dataObj.toLocaleDateString('pt-BR');
-        }
+        const dataFormatada = dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+        dataText = `Para dia ${dataFormatada} às ${horario}`;
     }
     
-    // Resumo com emojis
-    let resumo = `👤 PEDIDO DE: ${nome}\n\n`;
+    // Resumo com formatação correta
+    let resumo = `👤 Resumo Do Pedido De: ${capitalizeWords(nome)}\n\n`;
     
     // Combos
     Object.entries(orderState.combos).forEach(([comboName, combo]) => {
         if (combo.quantity > 0) {
             const config = comboConfigs[comboName];
             const total = combo.quantity * combo.price;
+            const comboNameFormatted = capitalizeWords(config.name);
             
-            if (combo.quantity === 1) {
-                resumo += `🍱 ${config.name} - R$${total.toFixed(2)}\n`;
-            } else {
-                resumo += `🍱 ${combo.quantity} ${config.name} - R$${total.toFixed(2)}\n`;
-            }
+            resumo += `🍱 ${combo.quantity > 1 ? combo.quantity + ' ' : ''}${comboNameFormatted} - R$${total.toFixed(2)}\n`;
             
             // Sabores
             Object.entries(combo.sabores).forEach(([saborName, qty]) => {
                 if (qty > 0) {
-                    const displayName = saborNames[saborName] || saborName;
+                    const displayName = capitalizeWords(saborNames[saborName] || saborName);
                     resumo += `  • ${qty} ${displayName}\n`;
                 }
             });
@@ -1026,7 +1025,7 @@ function generateOrderSummary() {
             if (config.hasRefri) {
                 Object.entries(combo.refrigerantes).forEach(([refriName, qty]) => {
                     if (qty > 0) {
-                        const displayName = refriNames[refriName] || refriName;
+                        const displayName = capitalizeWords(refriNames[refriName] || refriName);
                         resumo += `  • ${qty} ${displayName}\n`;
                     }
                 });
@@ -1039,11 +1038,11 @@ function generateOrderSummary() {
     // Salgados avulsos
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
-        resumo += 'SALGADOS AVULSOS:\n';
+        resumo += '🍱 Salgados De R$1,00\n';
         salgadosWithQty.forEach(([name, item]) => {
-            const displayName = saborNames[name] || name;
+            const displayName = capitalizeWords(saborNames[name] || name);
             const total = item.quantity * item.price;
-            resumo += `  • ${item.quantity} ${displayName} - R$${total.toFixed(2)}\n`;
+            resumo += `  • ${item.quantity} ${displayName}\n`;
         });
         resumo += '\n';
     }
@@ -1051,18 +1050,18 @@ function generateOrderSummary() {
     // Bebidas avulsas
     const bebidasWithQty = Object.entries(orderState.bebidas).filter(([_, item]) => item.quantity > 0);
     if (bebidasWithQty.length > 0) {
-        resumo += '🥤 BEBIDAS:\n';
+        resumo += '🥤 Bebidas\n';
         bebidasWithQty.forEach(([name, item]) => {
-            let displayName = name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            let displayName = capitalizeWords(name.replace(/-/g, ' '));
             const total = item.quantity * item.price;
-            resumo += `  • ${item.quantity} ${displayName} - R$${total.toFixed(2)}\n`;
+            resumo += `  • ${item.quantity} ${displayName}\n`;
         });
         resumo += '\n';
     }
     
-    resumo += `📅 RETIRADA: ${dataText} às ${horario}\n\n`;
-    resumo += `💰 VALOR TOTAL = *R$${orderState.total.toFixed(2)}*\n\n`;
-    resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGAO SUPERMERCADO*';
+    resumo += `📅 _${dataText}_\n\n`;
+    resumo += `💰 *VALOR TOTAL = R$${orderState.total.toFixed(2)}*\n\n`;
+    resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
     
     return resumo;
 }
