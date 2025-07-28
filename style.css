@@ -251,6 +251,18 @@ body {
     margin-bottom: 20px;
     color: #000;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.combo-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 4px;
+    vertical-align: middle;
 }
 
 .combo-card .price {
