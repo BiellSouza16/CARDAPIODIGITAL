@@ -915,8 +915,8 @@ body {
     font-size: 1.2rem;
 }
 .combo-icon {
-  width: 40px !important;
-  height: 40px !important;
+  width: 70px !important;
+  height: 70px !important;
   object-fit: contain;
   vertical-align: middle;
   margin-right: 8px;
