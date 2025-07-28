@@ -995,6 +995,38 @@ function generateOrderSummary() {
         });
     }
     
+    // Função para formatar nome do combo no resumo
+    function formatComboNameForSummary(comboName, quantity, config) {
+        const comboNameFormatted = capitalizeWords(config.name);
+        
+        // Para combos sem refrigerante (apenas minis salgados)
+        if (!config.hasRefri) {
+            const totalMinis = quantity * config.units;
+            return `${totalMinis} Minis Salgados`;
+        }
+        
+        // Para combos com refrigerante
+        const totalRefris = quantity * config.refriCount;
+        let formattedName = comboNameFormatted;
+        
+        // Substituir padrões específicos para cada tipo de combo
+        if (comboName === 'combo-25-com') {
+            // "Combo a Dois com 2 Refri 200ml" → "X Combo a Dois Com Y Refri's 200ml"
+            const refriText = totalRefris === 1 ? 'Refri' : "Refri's";
+            formattedName = `${quantity} Combo a Dois Com ${totalRefris} ${refriText} 200ml`;
+        } else if (comboName === 'combo-50-com') {
+            // "Combo Grupinho com 1 Refri 1L" → "X Combo Grupinho Com Y Refri's 1L"
+            const refriText = totalRefris === 1 ? 'Refri' : "Refri's";
+            formattedName = `${quantity} Combo Grupinho Com ${totalRefris} ${refriText} 1L`;
+        } else if (comboName === 'combo-100-com') {
+            // "Combo Galera com 1 Refri 2L" → "X Combo Galera Com Y Refri's 2L"
+            const refriText = totalRefris === 1 ? 'Refri' : "Refri's";
+            formattedName = `${quantity} Combo Galera Com ${totalRefris} ${refriText} 2L`;
+        }
+        
+        return formattedName;
+    }
+    
     // Formatar data
     const dataObj = new Date(data + 'T00:00:00');
     const hoje = new Date();
@@ -1016,9 +1048,9 @@ function generateOrderSummary() {
         if (combo.quantity > 0) {
             const config = comboConfigs[comboName];
             const total = combo.quantity * combo.price;
-            const comboNameFormatted = capitalizeWords(config.name);
+            const comboNameFormatted = formatComboNameForSummary(comboName, combo.quantity, config);
             
-            resumo += `🍱 ${combo.quantity > 1 ? combo.quantity + ' ' : ''}${comboNameFormatted} - R$${total.toFixed(2)}\n`;
+            resumo += `🍱 ${comboNameFormatted} - R$${total.toFixed(2)}\n`;
             
             // Sabores
             Object.entries(combo.sabores).forEach(([saborName, qty]) => {
