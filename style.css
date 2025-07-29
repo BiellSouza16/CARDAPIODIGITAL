@@ -87,10 +87,10 @@ body {
     color: #fff;
     font-size: 1.4rem;
     font-weight: 700;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: 2px solid #AB000E;
     box-shadow: 0 4px 15px rgba(171, 0, 14, 0.4);
-    transform: scale(1.05);
+    transform: scale(1.02);
     position: relative;
     overflow: hidden;
 }
@@ -117,7 +117,7 @@ body {
 .nav-btn[data-section="finalizar"]:hover {
     background-color: #8B000B;
     border-color: #8B000B;
-    transform: scale(1.08) translateY(-2px);
+    transform: scale(1.05) translateY(-2px);
     box-shadow: 0 6px 20px rgba(139, 0, 11, 0.5);
 }
 
@@ -822,8 +822,10 @@ body {
     }
     
     .nav-btn[data-section="finalizar"] {
-        font-size: 1.2rem;
-        padding: 10px 15px;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+        transform: scale(1.0);
+        margin: 0 2px;
     }
     
     .logo {
@@ -902,17 +904,22 @@ body {
     .nav {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 3px;
     }
     
     .nav-btn {
-        flex: 1;
-        min-width: 140px;
+        flex: 0 1 auto;
+        min-width: 120px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
     }
     
     .nav-btn[data-section="finalizar"] {
-        font-size: 1.1rem;
-        padding: 10px 12px;
-        min-width: 150px;
+        font-size: 1.0rem;
+        padding: 6px 10px;
+        min-width: 130px;
+        transform: scale(1.0);
+        margin: 0;
     }
     
     .container {
