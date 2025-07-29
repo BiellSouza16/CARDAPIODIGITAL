@@ -812,8 +812,29 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    }
+    .nav {
         gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        min-width: 110px;
+        flex: 0 1 auto;
+        text-align: center;
+    }
+    
+    .nav-btn[data-section="finalizar"] {
+        font-size: 1.2rem;
+        padding: 12px 16px;
+        transform: scale(1.0);
+        margin: 0;
+        min-width: 130px;
+    }
+    
+    .logo {
         font-size: 1.5rem;
     }
     
@@ -875,116 +896,39 @@ body {
     }
     
     .header .container {
-        padding: 12px 15px;
-        gap: 10px;
-    }
-    
-    .logo {
-        flex-shrink: 0;
-    }
-    
-    
-    .nav::-webkit-scrollbar {
-        display: none;
-        padding: 10px 14px;
-        font-size: 0.85rem;
-        min-width: 110px;
-        flex: 0 1 auto;
-        min-width: 85px;
-        font-size: 0.8rem;
-        padding: 8px 10px;
-    }
-    
-    .nav-btn[data-section="finalizar"] {
-        font-size: 1.2rem;
-        padding: 12px 16px;
-        transform: scale(1.0);
-        margin: 0;
-        min-width: 130px;
-    }
-    
-    .logo {
-        font-size: 1.5rem;
-    }
-    
-    .logo-icon {
-        width: 48px;
-        height: 48px;
-        margin-left: 5px;
+        flex-direction: column;
+        gap: 15px;
+        padding: 12px 20px;
     }
     
     .main {
-        margin-top: 85px;
+        margin-top: 130px;
     }
 }
 
 @media (max-width: 480px) {
-    .header .container {
-        padding: 10px 12px;
-        gap: 8px;
-    
-    .logo {
-        font-size: 1.3rem;
-    }
-    
-    .logo-icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .nav-btn {
-        min-width: 75px;
-        font-size: 0.75rem;
-        padding: 6px 8px;
-    }
-    
-    .nav-btn[data-section="finalizar"] {
-        font-size: 0.9rem;
-        padding: 6px 8px;
-    }
-    
-    .header .container {
-        padding: 12px 15px;
-        gap: 10px;
-    }
-    
-    .logo {
-        flex-shrink: 0;
-    }
-    
     .nav {
-        flex: 1;
-        min-width: 0;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    
-    .nav::-webkit-scrollbar {
-        display: none;
+        justify-content: center;
+        gap: 6px;
+        padding: 0 10px;
     }
     
     .nav-btn {
-        flex-shrink: 0;
-        white-space: nowrap;
         min-width: 85px;
         font-size: 0.8rem;
-        padding: 8px 10px;
+        padding: 8px 12px;
+        flex: 1 1 auto;
+        max-width: 100px;
     }
     
     .nav-btn[data-section="finalizar"] {
         font-size: 1.0rem;
-        padding: 6px 10px;
-        min-width: 85px;
+        padding: 8px 12px;
+        min-width: 95px;
+        max-width: 110px;
         transform: scale(1.0);
-        margin-left: 5px;
-    }
-    
-    .main {
-        margin-top: 85px;
+        margin: 0;
+        flex: 1 1 auto;
     }
     
     .container {
@@ -1008,6 +952,11 @@ body {
         width: 80px;
         height: 80px;
         margin-right: 10px;
+    }
+    
+    .logo-icon {
+        width: 42px;
+        height: 42px;
     }
     
     .back-to-top {
