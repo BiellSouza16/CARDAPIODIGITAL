@@ -6,7 +6,8 @@ let orderState = {
     cliente: {
         nome: '',
         data: '',
-        horario: ''
+        horario: '',
+        loja: ''
     },
     total: 0
 };
@@ -771,7 +772,7 @@ function updateOrderSummary() {
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
         hasItems = true;
-        html += '<div class="summary-section"><h4><img src="public/1 Sem Título_20250726200403.png" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
+        html += '<div class="summary-section"><h4><img src="public/Logo Principal Header.jpg" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
         salgadosWithQty.forEach(([name, item]) => {
             const displayName = saborNames[name] || name;
             const total = item.quantity * item.price;
@@ -854,12 +855,21 @@ function initializeFinalizacao() {
     const nomeInput = document.getElementById('cliente-nome');
     const dataInput = document.getElementById('data-retirada');
     const horarioInput = document.getElementById('horario-retirada');
+    const lojaInputs = document.querySelectorAll('input[name="loja"]');
     const finalizarBtn = document.getElementById('finalizar-pedido-btn');
     
     // Event listeners para campos obrigatórios
     [nomeInput, dataInput, horarioInput].forEach(input => {
         input.addEventListener('input', () => {
             orderState.cliente[input.id.replace('cliente-', '').replace('-retirada', '')] = input.value;
+            validateFinalizacao();
+        });
+    });
+    
+    // Event listeners para seleção de loja
+    lojaInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            orderState.cliente.loja = input.value;
             validateFinalizacao();
         });
     });
@@ -876,9 +886,10 @@ function validateFinalizacao() {
     const nome = document.getElementById('cliente-nome').value.trim();
     const data = document.getElementById('data-retirada').value;
     const horario = document.getElementById('horario-retirada').value;
+    const loja = orderState.cliente.loja;
     const finalizarBtn = document.getElementById('finalizar-pedido-btn');
     
-    const isValid = nome && data && horario && orderState.total > 0;
+    const isValid = nome && data && horario && loja && orderState.total > 0;
     finalizarBtn.disabled = !isValid;
 }
 
@@ -890,6 +901,7 @@ function validateOrderComplete() {
     const nome = document.getElementById('cliente-nome').value.trim();
     const data = document.getElementById('data-retirada').value;
     const horario = document.getElementById('horario-retirada').value;
+    const loja = orderState.cliente.loja;
     
     if (!nome) {
         errors.push('👤 Informe seu nome completo');
@@ -901,6 +913,10 @@ function validateOrderComplete() {
     
     if (!horario) {
         errors.push('🕐 Selecione o horário de retirada');
+    }
+    
+    if (!loja) {
+        errors.push('📍 Selecione a loja para retirada do pedido');
     }
     
     // Validar se tem pelo menos um item no pedido
@@ -1100,7 +1116,13 @@ function generateOrderSummary() {
     
     resumo += `📅 _${dataText}_\n\n`;
     resumo += `💰 *VALOR TOTAL = R$${orderState.total.toFixed(2)}*\n\n`;
-    resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
+    
+    // Informação da loja baseada na seleção
+    if (orderState.cliente.loja === 'loja1') {
+        resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
+    } else if (orderState.cliente.loja === 'loja2') {
+        resumo += '📌 *RETIRADA NA LOJA 02 PRÓXIMO AO MUNDO DE R$1,00*';
+    }
     
     return resumo;
 }
