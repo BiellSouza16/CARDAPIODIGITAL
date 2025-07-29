@@ -896,39 +896,79 @@ body {
     }
     
     .header .container {
-        flex-direction: column;
-        gap: 15px;
-        padding: 12px 20px;
+        padding: 12px 15px;
+        gap: 10px;
     }
     
-    .main {
-        margin-top: 130px;
+    .logo {
+        flex-shrink: 0;
     }
-}
-
-@media (max-width: 480px) {
+    
     .nav {
-        justify-content: center;
-        gap: 6px;
-        padding: 0 10px;
+        flex: 1;
+        min-width: 0;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .nav::-webkit-scrollbar {
+        display: none;
     }
     
     .nav-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
         min-width: 85px;
         font-size: 0.8rem;
-        padding: 8px 12px;
-        flex: 1 1 auto;
-        max-width: 100px;
+        padding: 8px 10px;
     }
     
     .nav-btn[data-section="finalizar"] {
         font-size: 1.0rem;
         padding: 8px 12px;
         min-width: 95px;
-        max-width: 110px;
         transform: scale(1.0);
-        margin: 0;
-        flex: 1 1 auto;
+        margin-left: 5px;
+    }
+    
+    .main {
+        margin-top: 85px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header .container {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nav-btn {
+        min-width: 75px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    
+    .nav-btn[data-section="finalizar"] {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        min-width: 85px;
+    }
+    
+    .main {
+        margin-top: 75px;
     }
     
     .container {
@@ -952,11 +992,6 @@ body {
         width: 80px;
         height: 80px;
         margin-right: 10px;
-    }
-    
-    .logo-icon {
-        width: 42px;
-        height: 42px;
     }
     
     .back-to-top {
