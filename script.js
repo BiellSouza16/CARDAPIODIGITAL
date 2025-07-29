@@ -827,8 +827,8 @@ function updateOrderSummary() {
         html += '<div class="summary-section"><h4>🥤 Bebidas Avulsas:</h4><ul>';
         bebidasWithQty.forEach(([name, item]) => {
             const total = item.quantity * item.price;
-            // Converter nome da bebida para display
-            let displayName = capitalizeWords(name.replace(/-/g, ' '));
+            // Converter nome da bebida para display com formatação correta
+            let displayName = formatBebidaName(name);
             html += `<li>${item.quantity} ${displayName} - R$ ${total.toFixed(2).replace('.', ',')}</li>`;
         });
         html += '</ul></div>';
@@ -852,6 +852,24 @@ function updateOrderSummary() {
     }
     
     summaryContent.innerHTML = html;
+}
+
+// Função para formatar nomes das bebidas corretamente
+function formatBebidaName(name) {
+    const bebidaFormats = {
+        'pepsi-200': 'Pepsi 200ml',
+        'guarana-200': 'Guaraná 200ml',
+        'pepsi-350': 'Pepsi 350ml',
+        'guarana-350': 'Guaraná 350ml',
+        'pepsi-1l': 'Pepsi 1L',
+        'guarana-1l': 'Guaraná 1L',
+        'it-cola-2l': 'It Cola 2L',
+        'it-guarana-2l': 'It Guaraná 2L',
+        'agua-mineral': 'Água Mineral',
+        'agua-gas': 'Água com Gás'
+    };
+    
+    return bebidaFormats[name] || capitalizeWords(name.replace(/-/g, ' '));
 }
 
 // Função auxiliar para capitalizar palavras (adicionada no escopo global)
@@ -1119,7 +1137,7 @@ function generateOrderSummary() {
     if (bebidasWithQty.length > 0) {
         resumo += '🥤 Bebidas\n';
         bebidasWithQty.forEach(([name, item]) => {
-            let displayName = capitalizeWords(name.replace(/-/g, ' '));
+            let displayName = formatBebidaName(name);
             const total = item.quantity * item.price;
             resumo += `  • ${item.quantity} ${displayName}\n`;
         });
