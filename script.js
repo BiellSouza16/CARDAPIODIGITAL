@@ -838,6 +838,17 @@ function updateOrderSummary() {
         html = '<p class="empty-order">Adicione itens ao seu pedido para ver o resumo aqui.</p>';
     } else {
         html += `<div class="summary-total"><strong>Total Geral: R$ ${orderState.total.toFixed(2).replace('.', ',')}</strong></div>`;
+        
+        // Adicionar informação da loja selecionada
+        if (orderState.cliente.loja) {
+            html += '<div class="summary-store-info">';
+            if (orderState.cliente.loja === 'loja1') {
+                html += '<p><strong>📍 Retirada na Loja 1:</strong><br>Júlio Aragão - Ao lado do Budegão Supermercado</p>';
+            } else if (orderState.cliente.loja === 'loja2') {
+                html += '<p><strong>📍 Retirada na Loja 2:</strong><br>Castro Alves - Próximo ao Mundo de R$1,00</p>';
+            }
+            html += '</div>';
+        }
     }
     
     summaryContent.innerHTML = html;
@@ -871,6 +882,7 @@ function initializeFinalizacao() {
         input.addEventListener('change', () => {
             orderState.cliente.loja = input.value;
             validateFinalizacao();
+            updateOrderSummary(); // Atualizar resumo em tempo real
         });
     });
     
@@ -1131,8 +1143,15 @@ function sendToWhatsApp() {
     const resumoText = generateOrderSummary();
     const encodedText = encodeURIComponent(resumoText);
     
-    // Número do WhatsApp da Coxinha Real
-    const phoneNumber = '5573981741968';
+    // Número do WhatsApp baseado na loja selecionada
+    let phoneNumber;
+    if (orderState.cliente.loja === 'loja1') {
+        phoneNumber = '5573981741968'; // Loja 1
+    } else if (orderState.cliente.loja === 'loja2') {
+        phoneNumber = '5573982425122'; // Loja 2
+    } else {
+        phoneNumber = '5573981741968'; // Padrão loja 1
+    }
     
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
     
