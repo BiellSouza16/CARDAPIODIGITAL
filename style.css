@@ -469,6 +469,25 @@ body {
     text-align: center;
 }
 
+.card-fee-warning {
+    background-color: #FFE6E6;
+    color: #8B0000;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 2px solid #FF6B6B;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.card-fee-info {
+    text-align: center;
+    margin-top: 10px;
+    color: #666;
+    font-style: italic;
+}
+
 .total-section {
     text-align: center;
     margin-bottom: 30px;
@@ -816,6 +835,11 @@ body {
         gap: 8px;
         justify-content: center;
         flex-wrap: wrap;
+    }
+    
+    .card-fee-warning {
+        font-size: 1rem;
+        padding: 15px;
     }
     
     .nav-btn {
