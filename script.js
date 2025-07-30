@@ -1147,6 +1147,9 @@ function generateOrderSummary() {
     resumo += `📅 _${dataText}_\n\n`;
     resumo += `💰 *VALOR TOTAL = R$${orderState.total.toFixed(2)}*\n\n`;
     
+    // Aviso sobre taxas do cartão
+    resumo += `💳 *ATENÇÃO: Pagamentos no cartão têm acréscimo de 2% no débito e 5% no crédito*\n\n`;
+    
     // Informação da loja baseada na seleção
     if (orderState.cliente.loja === 'loja1') {
         resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
