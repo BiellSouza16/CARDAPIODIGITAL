@@ -1167,7 +1167,7 @@ function sendToWhatsApp() {
     // Número do WhatsApp baseado na loja selecionada
     let phoneNumber;
     if (orderState.cliente.loja === 'loja1') {
-        phoneNumber = '5573981741968'; // Loja 1
+        phoneNumber = '5573981132678'; // Loja 1
     } else if (orderState.cliente.loja === 'loja2') {
         phoneNumber = '5573982425122'; // Loja 2
     } else {
