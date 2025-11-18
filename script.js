@@ -998,6 +998,7 @@ function initializeModal() {
     const closeBtn = modal.querySelector('.close');
     const cancelBtn = document.getElementById('fechar-modal');
     const whatsappBtn = document.getElementById('enviar-whatsapp');
+    const whatsappBtnAlt = document.getElementById('btn-finalizar-whatsapp');
     
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -1010,6 +1011,13 @@ function initializeModal() {
     whatsappBtn.addEventListener('click', () => {
         sendToWhatsApp();
     });
+    
+    // Event listener para o botão alternativo (se existir)
+    if (whatsappBtnAlt) {
+        whatsappBtnAlt.addEventListener('click', () => {
+            sendToWhatsApp();
+        });
+    }
     
     // Fechar modal clicando fora
     window.addEventListener('click', (event) => {
@@ -1027,6 +1035,140 @@ function showOrderModal() {
     resumoContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${resumoText}</pre>`;
     
     modal.style.display = 'block';
+    
+    // Implementar auto-scroll inteligente para os botões
+    setTimeout(() => {
+        // Usar o botão principal como referência (enviar-whatsapp)
+        let btn = document.getElementById('btn-finalizar-whatsapp');
+        
+        // Se o botão específico não existir, usar o botão padrão
+        if (!btn) {
+            btn = document.getElementById('enviar-whatsapp');
+        }
+        
+        if (!btn) return;
+        
+        // Verificar se o modal está visível e se o botão existe
+        const modalContent = modal.querySelector('.modal-content');
+        if (!modalContent) return;
+        
+        // Obter as dimensões do botão em relação ao viewport
+        const rect = btn.getBoundingClientRect();
+        const modalRect = modalContent.getBoundingClientRect();
+        
+        // Verificar se o botão está visível dentro da área do modal
+        const isVisibleInModal = (
+            rect.top >= modalRect.top && 
+            rect.bottom <= modalRect.bottom &&
+            rect.top >= 0 && 
+            rect.bottom <= window.innerHeight
+        );
+        
+        // Se o botão não estiver visível, fazer scroll suave até ele
+        if (!isVisibleInModal) {
+            // Para modais com scroll interno, usar scroll suave customizado
+            if (modalContent.scrollHeight > modalContent.clientHeight) {
+                // Modal tem scroll interno - usar animação customizada
+                const modalActions = btn.closest('.modal-actions');
+                if (modalActions) {
+                    smoothScrollInModal(modalContent, modalActions, 1500);
+                } else {
+                    smoothScrollInModal(modalContent, btn, 1500);
+                }
+            } else {
+                // Modal sem scroll interno, usar scroll suave da página
+                smoothScrollToElement(btn, 1500);
+            }
+        }
+    }, 800);
+}
+
+// Função para scroll suave e gradual
+function smoothScrollToElement(element, duration = 1500) {
+    const targetElement = element;
+    if (!targetElement) return;
+    
+    // Obter posição atual e posição alvo
+    const startPosition = window.pageYOffset;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    
+    // Se a distância for muito pequena, usar scrollIntoView normal
+    if (Math.abs(distance) < 100) {
+        targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+        return;
+    }
+    
+    let startTime = null;
+    
+    // Função de easing para movimento mais natural
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Aplicar easing para movimento suave
+        const easedProgress = easeInOutCubic(progress);
+        const currentPosition = startPosition + (distance * easedProgress);
+        
+        window.scrollTo(0, currentPosition);
+        
+        if (progress < 1) {
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    requestAnimationFrame(animation);
+}
+
+// Função para scroll suave dentro do modal
+function smoothScrollInModal(modalContent, targetElement, duration = 1500) {
+    if (!modalContent || !targetElement) return;
+    
+    const startScrollTop = modalContent.scrollTop;
+    const targetScrollTop = targetElement.offsetTop - (modalContent.clientHeight / 2) + (targetElement.clientHeight / 2);
+    const distance = targetScrollTop - startScrollTop;
+    
+    // Se a distância for muito pequena, usar scrollIntoView normal
+    if (Math.abs(distance) < 50) {
+        targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+        return;
+    }
+    
+    let startTime = null;
+    
+    // Função de easing para movimento mais natural
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Aplicar easing para movimento suave
+        const easedProgress = easeInOutCubic(progress);
+        const currentScrollTop = startScrollTop + (distance * easedProgress);
+        
+        modalContent.scrollTop = currentScrollTop;
+        
+        if (progress < 1) {
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    requestAnimationFrame(animation);
 }
 
 function generateOrderSummary() {
