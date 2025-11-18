@@ -1171,7 +1171,7 @@ function sendToWhatsApp() {
     } else if (orderState.cliente.loja === 'loja2') {
         phoneNumber = '5573982425122'; // Loja 2
     } else {
-        phoneNumber = '5573981741968'; // Padrão loja 1
+        phoneNumber = '5573981132678'; // Padrão loja 1
     }
     
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
