@@ -32,21 +32,21 @@ const refriNames = {
     'guarana-200': 'Guaraná 200ml',
     'pepsi-1l': 'Pepsi 1L',
     'guarana-1l': 'Guaraná 1L',
-    'it-cola-2l': 'It Cola 2L',
-    'it-guarana-2l': 'It Guaraná 2L'
+    'pepsi-cola-2l': 'Pepsi Cola 2L',
+    'guarana-antarctica-2l': 'Guaraná Antarctica 2L'
 };
 
 // Configurações dos combos atualizadas
 const comboConfigs = {
     'combo-25-sem': {
-        name: '25 Minis Salgados',
-        units: 25,
+        name: '30 Minis Salgados',
+        units: 30,
         refriCount: 0,
         hasRefri: false
     },
     'combo-25-com': {
         name: 'Combo a Dois com 2 Refri 200ml',
-        units: 25,
+        units: 30,
         refriCount: 2,
         hasRefri: true
     },
@@ -248,6 +248,7 @@ function updateSalgadoItem(itemName, quantity, price, totalElement, card) {
     
     updateGrandTotal();
     updateOrderSummary();
+    updatePrepTimeEstimate();
 }
 
 // Inicializar combos com nova estrutura
@@ -452,6 +453,7 @@ function updateComboQuantity(comboName, quantity, card, config) {
     updateComboTotal(comboName, totalElement);
     updateGrandTotal();
     updateOrderSummary();
+    updatePrepTimeEstimate();
 }
 
 function updateComboSaboresCounter(comboName, card, config) {
@@ -760,98 +762,72 @@ function updateGrandTotal() {
     }
 }
 
+// Calcular tempo médio de preparo baseado no total de salgados
+function calculatePrepTime() {
+    let totalSalgados = 0;
+
+    Object.entries(orderState.combos).forEach(([comboName, combo]) => {
+        if (combo.quantity > 0) {
+            const config = comboConfigs[comboName];
+            totalSalgados += combo.quantity * config.units;
+        }
+    });
+
+    const salgadosAvulsos = Object.values(orderState.salgados).reduce((sum, item) => sum + item.quantity, 0);
+    totalSalgados += salgadosAvulsos;
+
+    if (totalSalgados === 0) return 25;
+    if (totalSalgados <= 100) return 25;
+    if (totalSalgados <= 200) return 35;
+    if (totalSalgados <= 300) return 40;
+    if (totalSalgados <= 400) return 45;
+
+    return 45 + Math.ceil((totalSalgados - 400) / 100) * 10;
+}
+
+function formatPrepTime(prepTime) {
+    if (prepTime >= 60) {
+        const hours = Math.floor(prepTime / 60);
+        const mins = prepTime % 60;
+        return mins > 0 ? `${hours}h${mins}min` : `${hours}h`;
+    }
+    return `${prepTime} min`;
+}
+
+// Atualizar badges de tempo nos combos e indicador flutuante
+function updatePrepTimeEstimate() {
+    const prepTime = calculatePrepTime();
+    const timeText = formatPrepTime(prepTime);
+
+    const badges = document.querySelectorAll('.prep-time-badge');
+    badges.forEach(badge => {
+        badge.innerHTML = `<span class="prep-icon">&#9201;</span> Em média ${timeText}`;
+    });
+
+    const floatingIndicator = document.getElementById('floating-prep-time');
+    if (floatingIndicator) {
+        const hasItems = hasOrderItems();
+        if (hasItems) {
+            floatingIndicator.style.display = 'flex';
+            floatingIndicator.innerHTML = `&#9201; Tempo médio de preparo: <strong>${timeText}</strong>`;
+        } else {
+            floatingIndicator.style.display = 'none';
+        }
+    }
+}
+
 // Atualizar resumo do pedido
 function updateOrderSummary() {
     const summaryContent = document.getElementById('order-summary-content');
     if (!summaryContent) return;
-    
-    let html = '';
-    let hasItems = false;
-    
-    // Salgados
-    const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
-    if (salgadosWithQty.length > 0) {
-        hasItems = true;
-        html += '<div class="summary-section"><h4><img src="public/Logo Principal Header.jpg" alt="Logo" class="summary-logo"> Salgados de R$1,00:</h4><ul>';
-        salgadosWithQty.forEach(([name, item]) => {
-            const displayName = saborNames[name] || name;
-            const total = item.quantity * item.price;
-            html += `<li>${item.quantity} ${displayName} - R$ ${total.toFixed(2).replace('.', ',')}</li>`;
-        });
-        html += '</ul></div>';
+
+    if (!hasOrderItems()) {
+        summaryContent.innerHTML = '<p class="empty-order">Adicione itens ao seu pedido para ver o resumo aqui.</p>';
+        return;
     }
-    
-    // Combos
-    const combosWithQty = Object.entries(orderState.combos).filter(([_, combo]) => combo.quantity > 0);
-    if (combosWithQty.length > 0) {
-        hasItems = true;
-        html += '<div class="summary-section"><h4>🍱 Combos:</h4>';
-        combosWithQty.forEach(([name, combo]) => {
-            const config = comboConfigs[name];
-            const total = combo.quantity * combo.price;
-            html += `<div class="combo-summary">`;
-            html += `<p><strong>${combo.quantity} ${config.name} - R$ ${total.toFixed(2).replace('.', ',')}</strong></p>`;
-            
-            // Sabores do combo
-            const saboresWithQty = Object.entries(combo.sabores).filter(([_, qty]) => qty > 0);
-            if (saboresWithQty.length > 0) {
-                html += '<ul class="sabores-list">';
-                saboresWithQty.forEach(([saborName, qty]) => {
-                    const displayName = saborNames[saborName] || saborName;
-                    html += `<li>${qty} ${displayName}</li>`;
-                });
-                html += '</ul>';
-            }
-            
-            // Refrigerantes do combo
-            if (config.hasRefri) {
-                const refrisWithQty = Object.entries(combo.refrigerantes).filter(([_, qty]) => qty > 0);
-                if (refrisWithQty.length > 0) {
-                    html += '<ul class="refris-list">';
-                    refrisWithQty.forEach(([refriName, qty]) => {
-                        const displayName = refriNames[refriName] || refriName;
-                        html += `<li>${qty} ${displayName}</li>`;
-                    });
-                    html += '</ul>';
-                }
-            }
-            html += '</div>';
-        });
-        html += '</div>';
-    }
-    
-    // Bebidas
-    const bebidasWithQty = Object.entries(orderState.bebidas).filter(([_, item]) => item.quantity > 0);
-    if (bebidasWithQty.length > 0) {
-        hasItems = true;
-        html += '<div class="summary-section"><h4>🥤 Bebidas Avulsas:</h4><ul>';
-        bebidasWithQty.forEach(([name, item]) => {
-            const total = item.quantity * item.price;
-            // Converter nome da bebida para display com formatação correta
-            let displayName = formatBebidaName(name);
-            html += `<li>${item.quantity} ${displayName} - R$ ${total.toFixed(2).replace('.', ',')}</li>`;
-        });
-        html += '</ul></div>';
-    }
-    
-    if (!hasItems) {
-        html = '<p class="empty-order">Adicione itens ao seu pedido para ver o resumo aqui.</p>';
-    } else {
-        html += `<div class="summary-total"><strong>Total Geral: R$ ${orderState.total.toFixed(2).replace('.', ',')}</strong></div>`;
-        
-        // Adicionar informação da loja selecionada
-        if (orderState.cliente.loja) {
-            html += '<div class="summary-store-info">';
-            if (orderState.cliente.loja === 'loja1') {
-                html += '<p><strong>📍 Retirada na Loja 1:</strong><br>Júlio Aragão - Ao lado do Budegão Supermercado</p>';
-            } else if (orderState.cliente.loja === 'loja2') {
-                html += '<p><strong>📍 Retirada na Loja 2:</strong><br>Castro Alves - Próximo ao Mundo de R$1,00</p>';
-            }
-            html += '</div>';
-        }
-    }
-    
-    summaryContent.innerHTML = html;
+
+    summaryContent.innerHTML = '<div class="summary-preview"><div class="summary-preview-label">Seu pedido até agora</div><pre class="summary-preview-text"></pre></div>';
+    summaryContent.querySelector('.summary-preview-text').textContent = generateOrderSummary();
 }
 
 // Função para formatar nomes das bebidas corretamente
@@ -859,12 +835,12 @@ function formatBebidaName(name) {
     const bebidaFormats = {
         'pepsi-200': 'Pepsi 200ml',
         'guarana-200': 'Guaraná 200ml',
-        'pepsi-350': 'Pepsi 350ml',
-        'guarana-350': 'Guaraná 350ml',
+        'pepsi-350': 'Pepsi Lata 350ml',
+        'guarana-350': 'Guaraná Lata 350ml',
         'pepsi-1l': 'Pepsi 1L',
         'guarana-1l': 'Guaraná 1L',
-        'it-cola-2l': 'It Cola 2L',
-        'it-guarana-2l': 'It Guaraná 2L',
+        'pepsi-cola-2l': 'Pepsi Cola 2L',
+        'guarana-antarctica-2l': 'Guaraná Antarctica 2L',
         'agua-mineral': 'Água Mineral',
         'agua-gas': 'Água com Gás'
     };
@@ -892,6 +868,7 @@ function initializeFinalizacao() {
         input.addEventListener('input', () => {
             orderState.cliente[input.id.replace('cliente-', '').replace('-retirada', '')] = input.value;
             validateFinalizacao();
+            updateOrderSummary();
         });
     });
     
@@ -934,24 +911,24 @@ function validateOrderComplete() {
     const loja = orderState.cliente.loja;
     
     if (!nome) {
-        errors.push('👤 Informe seu nome completo');
+        errors.push('Informe seu nome completo');
     }
 
     if (!data) {
-        errors.push('📅 Selecione a data de retirada');
+        errors.push('Selecione a data de retirada');
     }
     
     if (!horario) {
-        errors.push('🕐 Selecione o horário de retirada');
+        errors.push('Selecione o horário de retirada');
     }
     
     if (!loja) {
-        errors.push('📍 Selecione a loja para retirada do pedido');
+        errors.push('Selecione a loja para retirada do pedido');
     }
     
     // Validar se tem pelo menos um item no pedido
     if (!hasOrderItems()) {
-        errors.push('🛒 Adicione pelo menos um item ao seu pedido');
+        errors.push('Adicione pelo menos um item ao seu pedido');
     }
     
     // Validar combos rigorosamente
@@ -998,7 +975,6 @@ function initializeModal() {
     const closeBtn = modal.querySelector('.close');
     const cancelBtn = document.getElementById('fechar-modal');
     const whatsappBtn = document.getElementById('enviar-whatsapp');
-    const whatsappBtnAlt = document.getElementById('btn-finalizar-whatsapp');
     
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -1011,13 +987,6 @@ function initializeModal() {
     whatsappBtn.addEventListener('click', () => {
         sendToWhatsApp();
     });
-    
-    // Event listener para o botão alternativo (se existir)
-    if (whatsappBtnAlt) {
-        whatsappBtnAlt.addEventListener('click', () => {
-            sendToWhatsApp();
-        });
-    }
     
     // Fechar modal clicando fora
     window.addEventListener('click', (event) => {
@@ -1032,143 +1001,17 @@ function showOrderModal() {
     const resumoContent = document.getElementById('resumo-pedido');
     
     const resumoText = generateOrderSummary();
-    resumoContent.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${resumoText}</pre>`;
+    resumoContent.innerHTML = '<pre class="modal-summary-text"></pre>';
+    resumoContent.querySelector('.modal-summary-text').textContent = resumoText;
     
     modal.style.display = 'block';
-    
-    // Implementar auto-scroll inteligente para os botões
+
+    const modalContent = modal.querySelector('.modal-content');
+    const whatsappBtn = document.getElementById('enviar-whatsapp');
+
     setTimeout(() => {
-        // Usar o botão principal como referência (enviar-whatsapp)
-        let btn = document.getElementById('btn-finalizar-whatsapp');
-        
-        // Se o botão específico não existir, usar o botão padrão
-        if (!btn) {
-            btn = document.getElementById('enviar-whatsapp');
-        }
-        
-        if (!btn) return;
-        
-        // Verificar se o modal está visível e se o botão existe
-        const modalContent = modal.querySelector('.modal-content');
-        if (!modalContent) return;
-        
-        // Obter as dimensões do botão em relação ao viewport
-        const rect = btn.getBoundingClientRect();
-        const modalRect = modalContent.getBoundingClientRect();
-        
-        // Verificar se o botão está visível dentro da área do modal
-        const isVisibleInModal = (
-            rect.top >= modalRect.top && 
-            rect.bottom <= modalRect.bottom &&
-            rect.top >= 0 && 
-            rect.bottom <= window.innerHeight
-        );
-        
-        // Se o botão não estiver visível, fazer scroll suave até ele
-        if (!isVisibleInModal) {
-            // Para modais com scroll interno, usar scroll suave customizado
-            if (modalContent.scrollHeight > modalContent.clientHeight) {
-                // Modal tem scroll interno - usar animação customizada
-                const modalActions = btn.closest('.modal-actions');
-                if (modalActions) {
-                    smoothScrollInModal(modalContent, modalActions, 1500);
-                } else {
-                    smoothScrollInModal(modalContent, btn, 1500);
-                }
-            } else {
-                // Modal sem scroll interno, usar scroll suave da página
-                smoothScrollToElement(btn, 1500);
-            }
-        }
-    }, 800);
-}
-
-// Função para scroll suave e gradual
-function smoothScrollToElement(element, duration = 1500) {
-    const targetElement = element;
-    if (!targetElement) return;
-    
-    // Obter posição atual e posição alvo
-    const startPosition = window.pageYOffset;
-    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    
-    // Se a distância for muito pequena, usar scrollIntoView normal
-    if (Math.abs(distance) < 100) {
-        targetElement.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-        return;
-    }
-    
-    let startTime = null;
-    
-    // Função de easing para movimento mais natural
-    function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-    }
-    
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
-        
-        // Aplicar easing para movimento suave
-        const easedProgress = easeInOutCubic(progress);
-        const currentPosition = startPosition + (distance * easedProgress);
-        
-        window.scrollTo(0, currentPosition);
-        
-        if (progress < 1) {
-            requestAnimationFrame(animation);
-        }
-    }
-    
-    requestAnimationFrame(animation);
-}
-
-// Função para scroll suave dentro do modal
-function smoothScrollInModal(modalContent, targetElement, duration = 1500) {
-    if (!modalContent || !targetElement) return;
-    
-    const startScrollTop = modalContent.scrollTop;
-    const targetScrollTop = targetElement.offsetTop - (modalContent.clientHeight / 2) + (targetElement.clientHeight / 2);
-    const distance = targetScrollTop - startScrollTop;
-    
-    // Se a distância for muito pequena, usar scrollIntoView normal
-    if (Math.abs(distance) < 50) {
-        targetElement.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-        return;
-    }
-    
-    let startTime = null;
-    
-    // Função de easing para movimento mais natural
-    function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-    }
-    
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
-        
-        // Aplicar easing para movimento suave
-        const easedProgress = easeInOutCubic(progress);
-        const currentScrollTop = startScrollTop + (distance * easedProgress);
-        
-        modalContent.scrollTop = currentScrollTop;
-        
-        if (progress < 1) {
-            requestAnimationFrame(animation);
-        }
-    }
-    
-    requestAnimationFrame(animation);
+        modalContent.scrollTo({ top: modalContent.scrollHeight, behavior: 'smooth' });
+    }, 100);
 }
 
 function generateOrderSummary() {
@@ -1229,7 +1072,7 @@ function generateOrderSummary() {
     }
     
     // Resumo com formatação correta
-    let resumo = `👤 Resumo Do Pedido De: ${capitalizeWords(nome)}\n\n`;
+    let resumo = `\u{1F464} Resumo Do Pedido De: ${capitalizeWords(nome)}\n\n`;
     
     // Combos
     Object.entries(orderState.combos).forEach(([comboName, combo]) => {
@@ -1238,13 +1081,13 @@ function generateOrderSummary() {
             const total = combo.quantity * combo.price;
             const comboNameFormatted = formatComboNameForSummary(comboName, combo.quantity, config);
             
-            resumo += `🍱 ${comboNameFormatted} - R$${total.toFixed(2)}\n`;
+            resumo += `\u{1F371} ${comboNameFormatted} - R$${total.toFixed(2)}\n`;
             
             // Sabores
             Object.entries(combo.sabores).forEach(([saborName, qty]) => {
                 if (qty > 0) {
                     const displayName = capitalizeWords(saborNames[saborName] || saborName);
-                    resumo += `  • ${qty} ${displayName}\n`;
+                    resumo += `  \u{2022} ${qty} ${displayName}\n`;
                 }
             });
             
@@ -1253,11 +1096,11 @@ function generateOrderSummary() {
                 Object.entries(combo.refrigerantes).forEach(([refriName, qty]) => {
                     if (qty > 0) {
                         const displayName = capitalizeWords(refriNames[refriName] || refriName);
-                        resumo += `  • ${qty} ${displayName}\n`;
+                        resumo += `  \u{2022} ${qty} ${displayName}\n`;
                     }
                 });
             }
-            
+
             resumo += '\n';
         }
     });
@@ -1265,11 +1108,11 @@ function generateOrderSummary() {
     // Salgados avulsos
     const salgadosWithQty = Object.entries(orderState.salgados).filter(([_, item]) => item.quantity > 0);
     if (salgadosWithQty.length > 0) {
-        resumo += '🍱 Salgados De R$1,00\n';
+        resumo += '\u{1F371} Salgados De R$1,00\n';
         salgadosWithQty.forEach(([name, item]) => {
             const displayName = capitalizeWords(saborNames[name] || name);
             const total = item.quantity * item.price;
-            resumo += `  • ${item.quantity} ${displayName}\n`;
+            resumo += `  \u{2022} ${item.quantity} ${displayName}\n`;
         });
         resumo += '\n';
     }
@@ -1277,26 +1120,26 @@ function generateOrderSummary() {
     // Bebidas avulsas
     const bebidasWithQty = Object.entries(orderState.bebidas).filter(([_, item]) => item.quantity > 0);
     if (bebidasWithQty.length > 0) {
-        resumo += '🥤 Bebidas\n';
+        resumo += '\u{1F964} Bebidas\n';
         bebidasWithQty.forEach(([name, item]) => {
             let displayName = formatBebidaName(name);
             const total = item.quantity * item.price;
-            resumo += `  • ${item.quantity} ${displayName}\n`;
+            resumo += `  \u{2022} ${item.quantity} ${displayName}\n`;
         });
         resumo += '\n';
     }
     
-    resumo += `📅 _${dataText}_\n\n`;
-    resumo += `💰 *VALOR TOTAL = R$${orderState.total.toFixed(2)}*\n\n`;
+    resumo += `\u{1F4C5} _${dataText}_\n\n`;
+    resumo += `\u{1F4B0} *VALOR TOTAL = R${orderState.total.toFixed(2)}*\n\n`;
     
     // Aviso sobre taxas do cartão
-    resumo += `💳 *ATENÇÃO: Pagamentos no cartão têm acréscimo de 2% no débito e 5% no crédito*\n\n`;
+    resumo += `\u{1F4B3} *ATENÇÃO: Pagamentos no cartão têm acréscimo de 2% no débito e 5% no crédito*\n\n`;
     
     // Informação da loja baseada na seleção
     if (orderState.cliente.loja === 'loja1') {
-        resumo += '📌 *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
+        resumo += '\u{1F4CC} *RETIRADA NA LOJA 01 AO LADO DO BUDEGÃO SUPERMERCADO*';
     } else if (orderState.cliente.loja === 'loja2') {
-        resumo += '📌 *RETIRADA NA LOJA 02 PRÓXIMO AO MUNDO DE R$1,00*';
+        resumo += '\u{1F4CC} *RETIRADA NA LOJA 02 PRÓXIMO AO MUNDO DE R$1,00*';
     }
     
     return resumo;
@@ -1325,7 +1168,7 @@ function sendToWhatsApp() {
     document.getElementById('resumo-modal').style.display = 'none';
     
     // Mostrar mensagem de sucesso
-    showErrorMessage('Pedido enviado com sucesso! 🎉', 'success');
+    showErrorMessage('Pedido enviado com sucesso!', 'success');
 }
 
 // Botão voltar ao topo
