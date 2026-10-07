@@ -1130,7 +1130,7 @@ function generateOrderSummary() {
     }
     
     resumo += `\u{1F4C5} _${dataText}_\n\n`;
-    resumo += `\u{1F4B0} *VALOR TOTAL = R$ {orderState.total.toFixed(2)}*\n\n`;
+    resumo += `\u{1F4B0} *VALOR TOTAL = R${orderState.total.toFixed(2)}*\n\n`;
     
     // Aviso sobre taxas do cartão
     resumo += `\u{1F4B3} *ATENÇÃO: Pagamentos no cartão têm acréscimo de 2% no débito e 5% no crédito*\n\n`;
